@@ -1,0 +1,114 @@
+#conversation-list-rows {
+    clear: both;
+}
+
+// REGULAR
+body {
+    #conversation-list-columns {
+        box-sizing: border-box;
+        width: 500px;
+        width: 40%;
+        float: left;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        border-right:1px solid $border;
+    }
+    #conversation-view,
+    #pm_view {
+        width: 60%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        -webkit-flex-direction:column;
+
+        &.latest {
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+    }
+
+    .rows {
+        #conversation-view,
+        #pm_view {
+            width: 100%;
+        }
+    }
+    #pm_thread {
+        flex:1;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        -webkit-transform: translate3d(0, 0, 0);
+
+        &:focus {
+            /* hotkey remove browser focus styling */
+            outline: none;
+        }
+    }
+    #conversation-list-rows {
+        height: 100%;
+        position: relative;
+        overflow: auto;
+    }
+    #pm_main {
+        height: calc(100% - 61px); /* #pm_header-desktop height */
+        float: left;
+        width: calc(100% - #{$sidebarWidth});
+    }
+    #wrapper {
+        position: relative; /* conversation-wrapper is absolute for sticky things*/
+        height: calc(100% - 56px); /* #pm_toolbar-desktop height */
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        clear: both;
+    }
+    &, #body {
+        min-height: 100%;
+    }
+    &.secure, &.secure #body {
+        overflow: hidden;
+        height: 100%;
+    }
+}
+
+// MOBILE
+body.appConfigBody-is-mobile {
+    &, #body {
+        height: 100%;
+        overflow: hidden;
+    }
+    #pm_main {
+        float: left;
+        height: calc(100% - 60px);
+    }
+    #pm_main,
+    #conversation-list-rows {
+        width: 100%;
+    }
+    #wrapper,
+    #conversation-list-columns,
+    #conversation-view {
+        clear: both;
+        float: left;
+        width: 100%;
+    }
+    #wrapper {
+        height: calc(100% - 70px);
+    }
+    #pm_view {
+        width: 60%;
+        float: left;
+        height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    #conversation-list-columns,
+    #conversation-list-rows,
+    #conversation-view {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100%;
+    }
+}

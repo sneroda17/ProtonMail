@@ -1,0 +1,28 @@
+{
+  "name": "sieve.js",
+  "homepage": "https://github.com/ProtonMail/sieve.js",
+  "authors": [],
+  "description": "Javascript library to wrap Sieve filter configuration",
+  "main": "sieve.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.10",
+    "underscore": "^1.8.3",
+    "deep-diff": "^0.3.4"
+  },
+  "_release": "9f42cdb843",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9f42cdb8432c2f674ee6557f1cfa4fe7fd120517"
+  },
+  "_source": "https://github.com/ProtonMail/sieve.js.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/ProtonMail/sieve.js.git"
+}

@@ -1,0 +1,235 @@
+<article class="message" ng-class="{
+    'open': message.expand,
+    'errorDecryption': message.failedDecryption,
+    'marked': message.ID === marked.ID,
+    'unread': message.IsRead === 0,
+    'details': message.toggleDetails === true,
+    'draft': message.Type === 1,
+    'sent': message.Type === 2 || message.Type === 3,
+    'hasSender': message.Sender.Address.length
+}">
+
+    <div class="summary" toggle-message>
+        <div class="pull-left">
+            <div class="meta">
+                <i class="history fa fa-reply" ng-if="message.IsReplied === 1"></i>
+                <i class="history fa fa-reply-all" ng-if="message.IsRepliedAll === 1"></i>
+                <i class="history fa fa-mail-forward" ng-if="message.IsForwarded === 1"></i>
+                <span class="contact message-contact">
+                    <span class="from message-contact-from"><span translate>From</span>:</span> <strong>{{ ::message.Sender | contact:'Name' }}</strong> <em>{{ ::message.Sender | contact:'Address' }}<message-compose-to class="message-contact-sender" data-key="Sender"></message-compose-to></em>
+                </span>
+            </div>
+            <div class="location message-summary-folder">
+                <folders-message></folders-message>
+            </div>
+        </div>
+        <div class="labels message-summary-labels">
+            <labels-element
+                data-button="remove"
+                data-element="message"
+                class="message-summary-labels-list"></labels-element>
+        </div>
+        <div class="time">
+            <i class="fa fa-paperclip" ng-show="message.NumAttachments > 0"></i>
+            <time class="time-readable">{{ ::message.Time | localReadableTime }}</time>
+            <time
+                class="time-machine"
+                time-refreshed="{{ ::message.Time }}"
+                time-filter="messageTime"
+                time-interval="30000"></time>
+        </div>
+        <div class="status">
+            <pt-star
+                data-model="message"
+                class="singleStar"
+                data-pt-star-type="message"></pt-star>
+
+            <span class="fa locks" ng-class="{
+                'fa-lock': !!!(message.IsEncrypted == '0'),
+                'text-purple': !!(message.IsEncrypted == '1') || !!(message.IsEncrypted == '3') || !!(message.IsEncrypted == '5') || !!(message.IsEncrypted == '6'),
+                'fa-unlock-alt': !!(message.IsEncrypted == '0'),
+                'pgp': !!(message.IsEncrypted == '7') || !!(message.IsEncrypted == '8')
+            }" title="{{ ::message.encryptionType() }}">
+            </span>
+        </div>
+    </div>
+
+    <div  ng-if="message.expand">
+
+        <div class="details">
+            <div class="recipients-summary">
+                <strong translate>To</strong>:
+                <span
+                    class="recipients-summary-label"
+                    ng-repeat="email in recipients() track by $id(email)"
+                    title="{{ ::email | contact:'Address' }}">{{::email | contact: 'Name': true | nameRecipient}}</span>
+            </div>
+
+            <div class="recipients-details">
+                <message-contacts
+                    class="recipients-details-toGroup"
+                    ng-if="message.ToList.length"
+                    data-model="::message.ToList"
+                    data-list="To"></message-contacts>
+
+                <message-contacts
+                    class="recipients-details-ccGroup"
+                    ng-if="message.CCList.length"
+                    data-model="::message.CCList"
+                    data-list="CC"></message-contacts>
+
+                <message-contacts
+                    class="recipients-details-bccGroup"
+                    ng-if="message.BCCList.length"
+                    data-model="::message.BCCList"
+                    data-list="BCC"></message-contacts>
+            </div>
+
+            <all-message-labels ng-if="message.toggleDetails"></all-message-labels>
+
+            <div class="action-row">
+
+                <div class="actions pull-right" ng-if="message.decrypting === false">
+                    <div class="pm_buttons">
+                        <filter-button data-message="message"></filter-button>
+                        <div class="pm_buttons">
+                            <a class="pm_trigger open-folder pull-left" pt-tooltip-translate="Move to" pt-tooltip-translate-context="Action" pt-tooltip-translate-comment="Tooltip" dropdown>
+                                <small><i class="fa fa-folder"></i> <i class="fa fa-angle-down"></i></small>
+                            </a>
+                            <div class="pm_dropdown right wide pull-left">
+                                <dropdown-folders data-elements="getElements"></dropdown-folders>
+                            </div>
+                        </div>
+                        <div class="pm_buttons">
+                            <a class="pm_trigger open-label pull-left" pt-tooltip-translate="Label as" pt-tooltip-translate-context="Action" pt-tooltip-translate-comment="Tooltip" dropdown>
+                                <small><i class="fa fa-tag"></i> <i class="fa fa-angle-down"></i></small>
+                            </a>
+                            <div class="pm_dropdown right wide pull-left">
+                                <dropdown-labels data-messages="getMessage" data-message="message" data-save="saveLabels"></dropdown-labels>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="pm_buttons">
+                        <a
+                            class="message-actionBtn-reply"
+                            data-action-compose="::message"
+                            data-action-compose-type="reply"
+                            pt-tooltip-translate="Reply"
+                            pt-tooltip-translate-context="Action">
+
+                            <i class="fa fa-mail-reply"></i>
+                        </a>
+                        <a
+                            class="message-actionBtn-replyall"
+                            data-action-compose="::message"
+                            data-action-compose-type="replyall"
+                            pt-tooltip-translate="Reply all" pt-tooltip-translate-context="Action">
+                            <i class="fa fa-mail-reply-all"></i>
+                        </a>
+
+                        <a
+                            class="message-actionBtn-forward"
+                            data-action-compose="::message"
+                            data-action-compose-type="forward"
+                            pt-tooltip-translate="Forward" pt-tooltip-translate-context="Action">
+                            <i class="fa fa-mail-forward"></i>
+                        </a>
+                        <a href="#" class="pm_trigger" dropdown pt-tooltip-translate="More" pt-tooltip-translate-context="Action">
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <div class="pm_dropdown wide right">
+                            <button
+                                data-action-message="move"
+                                data-action-message-type="inbox">
+                                <i class="fa fa-inbox"></i>
+                                <span translate translate-context="Action">Move to inbox</span>
+                            </button>
+                            <button
+                                data-action-message="move"
+                                data-action-message-type="trash">
+                                <i class="fa fa-trash-o"></i>
+                                <span translate translate-context="Action">Move to trash</span>
+                            </button>
+                            <button data-action-message="unread">
+                                <i class="fa fa-eye-slash"></i>
+                                <span translate translate-context="Action">Mark as unread</span>
+                            </button>
+                            <button
+                                data-action-message="move"
+                                data-action-message-type="spam"
+                                ng-hide="'secured.spam.**' | includedByState">
+                                <i class="fa fa-ban"></i>
+                                <span translate translate-context="Action">Mark as spam</span>
+                            </button>
+                            <button
+                                data-action-message="delete"
+                                ng-if="'secured.trash.**' | includedByState">
+                                <i class="fa fa-times"></i>
+                                <span translate translate-context="Action">Delete</span>
+                            </button>
+                            <button data-action-message="togglePlainHtml">
+                                <span ng-show="message.viewMode === 'html'">
+                                    <i class="fa fa-file-text-o"></i>
+                                    <span translate translate-context="Action">View source code</span>
+                                </span>
+                                <span ng-show="message.viewMode === 'plain'">
+                                    <i class="fa fa-file-photo-o"></i>
+                                    <span translate translate-context="Action">View rendered HTML</span>
+                                </span>
+                            </button>
+                            <button data-action-message="viewPgp">
+                                <i class="fa fa-code"></i>
+                                <span translate translate-context="Action" ng-if="message.IsEncrypted !== 0">View headers</span>
+                                <span translate translate-context="Action" ng-if="message.IsEncrypted === 0">View original</span>
+                            </button>
+                            <button data-action-message="print">
+                                <i class="fa fa-print"></i>
+                                <span translate translate-context="Action">Print</span>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+
+                <button class="toggleDetails" data-action-message="toggleDetails">
+                    <span class="toggleDetails-label-show" translate translate-context="Action">Show details</span>
+                    <span class="toggleDetails-label-hide" translate translate-context="Action">Hide details</span>
+                </button>
+
+            </div>
+        </div>
+
+        <div ng-if="message.ExpirationTime > 0" class="expiration">
+            <i class="fa fa-clock-o"></i>
+            <span translate>This message will expire in</span>
+            <time time-refreshed="{{ ::message.ExpirationTime }}"></time>
+        </div>
+
+        <message-spam-score ng-if="message.SpamScore === 100 || message.SpamScore === 101" data-score="{{ ::message.SpamScore }}"></message-spam-score>
+        <message-pgp-attachments ng-if="message.PgpMimeWithAttachments"></message-pgp-attachments>
+        <unsubscribe-panel ng-if="!unsubscribed && message.getListUnsubscribe()"></unsubscribe-panel>
+
+        <display-content-btn data-action="remote"></display-content-btn>
+        <display-content-btn data-action="embedded"></display-content-btn>
+
+        <div class="frame message-frame" data-embedded-img-loader data-inject-message-media>
+            <loader-tag ng-if="message.decrypting === true"></loader-tag>
+            <div class="alert alert-danger" role="alert" ng-if="message.failedDecryption">
+                <span class="pull-left fa fa-exclamation-triangle"></span>
+                <strong translate translate-context="Error">Decryption error</strong>
+                <div translate translate-context="Error">Decryption of this message's encryption content failed.</div>
+            </div>
+            <div
+                class="bodyDecrypted email"
+                ng-class="{'plain': message.isPlain}"
+                render-message-body
+                ng-if="message.viewMode === 'html' && !message.failedDecryption"
+                toggle-blockquote
+                mail-to scroll="true" ></div>
+            <pre class="email" ng-if="message.viewMode === 'plain' || message.failedDecryption" ng-bind="message.plainText()"></pre>
+        </div>
+
+        <list-attachments ng-if="message.Attachments.length" data-model="message"></list-attachments>
+    </div>
+    <div class="clear"></div>
+
+</article>

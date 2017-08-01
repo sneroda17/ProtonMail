@@ -1,0 +1,67 @@
+<form
+    method="post"
+    id="pm_login"
+    name="loginForm"
+    class="pm_panel alt pm_form loginForm-container"
+    novalidate role="form"
+    autocomplete="on"
+    ng-submit="enterLoginPassword()"
+    onsubmit="return false"
+    action="login">
+
+    <img src="assets/img/logo.png" height="20" alt="ProtonMail" class="logo" />
+
+    <h4 class="text-center margin-bottom">
+        <i class="fa fa-user title-icon"></i> <span translate-context="Title" translate>User login</span>
+    </h4>
+
+    <div class="alert alert-danger" id="error521" ng-if="error">{{ error.message }}</div>
+
+    <input
+        autofocus
+        autocapitalize="off"
+        autocorrect="off"
+        type="text"
+        ng-model="username"
+        tabindex="1"
+        id="username"
+        name="username"
+        placeholder-translate="Username"
+        class="margin loginForm-input-username"
+        required="" />
+
+    <password
+        class="margin loginForm-input-password"
+        data-id="password"
+        data-name="password"
+        data-value="password"
+        data-tabindex="2"
+        data-form="loginForm"
+        placeholder-translate="Password"></password>
+
+    <div class="loginForm-actions">
+        <div class="loginForm-actions-column">
+            <button
+                id="login_btn"
+                type="submit"
+                tabindex="3"
+                class="loginForm-actions-main pm_button primary pull-right loginForm-btn-submit"
+                ng-disabled="networkActivity.loading()"
+                translate-context="Action"
+                translate>Login</button>
+            <div class="loginForm-actions-row">
+                <button
+                    class="loginForm-btn-help"
+                    ng-click="displayHelpModal()"
+                    type="button"
+                    translate-context="Action"
+                    translate-comment="link for login help"
+                    translate>Need help?</button>
+                <signup-link class="loginForm-link-signup loginForm-actions-right"></signup-link>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" id="hashed_pw" name="hashed_pw" />
+
+</form>

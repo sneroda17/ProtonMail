@@ -1,0 +1,42 @@
+<section class="pm_opensans sidebar sidebarApp-container" data-pt-dropzone-container>
+    <button
+        class="compose pm_button sidebar-btn-compose"
+        action-compose
+        action-compose-type="new">
+        <div>
+            <i class="fa fa-pencil"></i>
+            <span translate-context="Action" translate translate-comment="compose button in sidebar">Compose</span>
+        </div>
+    </button>
+
+    <ul class="menu sidebarApp-menu">
+        <navigation-item
+            class="sidebarApp-item"
+            data-key="{{::state}}"
+            ng-repeat="state in listStates track by $id(state)"></navigation-item>
+    </ul>
+    <ul class="menu sidebarApp-menu" id="labelSettings">
+        <li class="sidebarApp-item">
+            <a ui-sref="secured.labels" class="sidebarApp-link">
+                <i class="fa fa-cog sidebarApp-icon"></i>
+                <span
+                    id="tour-label-settings"
+                    class="sidebarApp-label"
+                    translate-context="Action"
+                    translate>Folders / Labels</span>
+            </a>
+        </li>
+    </ul>
+
+
+    <div id="sidebarLabels" ng-scrollbars ng-scrollbars-config="::scrollbarConfig">
+        <div class="labels">
+            <menu-label class="sidebarApp-menu"></menu-label>
+        </div>
+    </div>
+
+    <div class="footer">
+        <sidebar-progress class="wrap"></sidebar-progress>
+        <app-version class="version"></app-version>
+    </div>
+</section>

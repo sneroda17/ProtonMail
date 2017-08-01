@@ -1,0 +1,32 @@
+.proton-embedded {
+	position: relative;
+	display: block;
+
+	&:before {
+		display:block;
+	  	position: relative;
+		height:45px;
+	}
+
+	&:after {
+	  content: " " attr(alt);
+	  color: rgba(0,0,0,0.5);
+	  position: absolute;
+	  top:0px;
+	  left: 0px;
+	  display: inline-block;
+	  padding: 10px 10px 10px 30px;
+	  background: url(/assets/img/icons/broken-img.png) no-repeat 5px 50% $white;
+	  border:1px solid;
+	  border-color: #444 #CCC #CCC #444
+	}
+}
+
+/* Responsiveness of our embedded images */
+
+.proton-embedded:not([width]):not([style*="width"]) {
+	/*	1. do not handle responsivess if there is a width attribute / inline width style
+		2. do not set auto height as long as it's not need to handle our embedded images (no height attribute)
+	*/
+	max-width: 100%;
+}

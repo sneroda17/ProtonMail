@@ -1,0 +1,51 @@
+body.appConfigBody-is-mobile {
+    .conversation {
+        .selection {
+            @include flexRow();
+            @include flexAlignCenter();
+            @include flexJustifyCenter();
+            position: absolute;
+            z-index: 99;
+            top:0;
+            width: 50px; /* row padding */
+            height: 100%;
+        }
+
+        .ptSelectConversation-container {
+            margin: 0;
+            width: 50px;
+            text-align: left;
+        }
+
+        .conversation-meta { max-width: 100% }
+
+        .row {
+            padding-left: 50px;
+            h4 {
+                width: calc(100% - 11rem);
+                .fa-mail-reply,
+                .fa-mail-reply-all,
+                .fa-mail-forward {
+                    margin-right: 2px;
+                }
+            }
+            .folderConversations-container {
+                display: inherit;
+                i.fa {
+                    width: 1rem;
+                    margin-right: 2px;
+                    text-align: center;
+                }
+            }
+            .senders.full {
+                width: calc(100% - 10rem);
+                cursor: pointer;
+            }
+            .senders {
+                .senders-name::after {content: ', '}
+                .senders-name:last-of-type::after {display: none}
+            }
+        }
+    }
+
+}

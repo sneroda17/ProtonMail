@@ -1,0 +1,71 @@
+<form
+    novalidate
+    class="dropdown-label-container"
+    ng-class="{'dropdown-label-hasLabels': labels.length}"
+    autocomplete="off">
+
+    <div class="dropdown-label-title">
+        <p class="dropdown-label-title-hasLabels" translate translate-context="title">Label as</p>
+        <p class="alert alert-info" translate translate-context="Info">No labels</p>
+    </div>
+
+    <label class="dropdown-label-search">
+        <i class="fa fa-search dropdown-label-search-icon"></i>
+        <input
+            class="dropdown-label-search-input"
+            type="search"
+            placeholder-translate="Filter labels"
+            ng-model="searchLabels"
+            ng-minlength="1">
+    </label>
+
+    <div class="dropdown-label-scrollbox scrollbox-container"  ng-if="labels.length > 0">
+        <ul class="scrollbox-container-group">
+            <li
+                class="scrollbox-container-group-item"
+                ng-repeat="label in (filteredLabels = (labels | filter: {Name: searchLabels} | orderBy: 'Order')) track by label.ID"
+                data-label-id="{{::label.ID}}">
+
+                <label class="dropdown-label-scrollbox-label" data-label-id="{{::label.ID}}">
+                    <span class="dropdown-label-scrollbox-label-text" ng-style="::color(label)">
+                        <i class="dropdown-label-scrollbox-label-icon fa fa-tag" data-label-id="{{::label.ID}}"></i>
+                        <span class="dropdown-label-scrollbox-label-text-ellipsis ellipsis">{{ ::label.Name }}</span>
+                    </span>
+                    <div class="dropdown-label-scrollbox-label-checkbox">
+                        <custom-checkbox
+                            data-custom-ng-model="label.Selected"
+                            data-custom-class="scrollbox-container-group-item-empty"
+                            data-custom-ui-indeterminate="label.Selected === null"></custom-checkbox>
+                    </div>
+                </label>
+            </li>
+            <li
+                class="scrollbox-container-group-item-empty"
+                ng-show="filteredLabels.length === 0"
+                translate
+                translate-context="Info">no label found</li>
+        </ul>
+    </div>
+
+    <create-label
+        data-class="dropdown-label-create"
+        data-message="message"
+        data-label-name="searchLabels"></create-label>
+
+    <label class="dropdown-label-alsoArchive">
+        <span class="dropdown-label-alsoArchive-txt label-fillWidth" translate translate-comment="Form checkbox option">Also Archive</span>
+        <div class="dropdown-label-alsoArchive-checkbox">
+            <custom-checkbox
+                data-custom-ng-model="alsoArchive"
+                data-custom-ng-change="changeAlsoArchive()"
+                data-custom-class="dropdownLabels-input-archive"></custom-checkbox>
+        </div>
+    </label>
+
+    <button
+        class="pm_button primary dropdown-label-apply"
+        tabindex="1"
+        ng-disabled="networkActivity.loading()"
+        translate-context="Action"
+        translate>Apply</button>
+</form>

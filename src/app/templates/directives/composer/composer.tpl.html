@@ -1,0 +1,132 @@
+<div class="composer animate composer-container" data-composer-id="{{::message.ID}}">
+
+    <composer-header></composer-header>
+    <composer-encrypt
+        class="composerOptions-container composer-options-encryption"
+        data-message="message"
+        ng-class="{ 'show': message.panelName == 'encrypt' }"></composer-encrypt>
+
+    <composer-expiration
+        class="composerOptions-container composer-options-expiration"
+        data-message="message"
+        ng-class="{ 'show': message.panelName == 'expiration' }" ></composer-expiration>
+
+    <div class="meta composer-meta" ng-class="{'composer-toggle-ccbcc': message.ccbcc}">
+        <composer-select-from
+            class="row fromRow composer-field-From"
+            data-model="message"></composer-select-from>
+
+        <composer-input-meta
+            data-model="message"
+            data-label="To"
+            data-key="ToList"
+            class="row toRow composer-field-ToList"></composer-input-meta>
+
+        <composer-input-meta
+            data-model="message"
+            data-label="CC"
+            data-key="CCList"
+            class="row ccRow composer-field-CCList"></composer-input-meta>
+
+        <composer-input-meta
+            data-model="message"
+            data-label="BCC"
+            data-key="BCCList"
+            class="row bccRow composer-field-BCCList"></composer-input-meta>
+
+        <composer-subject class="row subjectRow composer-field-Subject"></composer-subject>
+    </div>
+    <section class="flex" ng-if="!message.minimized" ng-form="composeForm{{$index}}">
+        <div class="composeEditor fill">
+            <composer-ask-embedded class="askEmbedding composer-askEmbedding"></composer-ask-embedded>
+
+            <div
+                class="dropzone composer-dropzone fill"
+                composer-dropzone
+                id="dropzone_message{{::message.ID}}"
+                ng-show="message.focussed"></div>
+
+            <squire
+                data-message="message"
+                allow-embedded="true"
+                class="composer-editor"
+                ng-click="attHide(message); message.autocompletesFocussed = false;"></squire>
+        </div>
+    </section>
+
+    <composer-attachments data-model="message"></composer-attachments>
+
+    <footer ng-hide="message.minimized" ng-class="{ 'disabled': message.displayPanel }">
+        <!-- needsClick is required to prevent fastClick (Safari Mobile click bug #4834) -->
+        <button class="pm_button composer-btn-attachment needsclick"
+            data-action-compose="::message"
+            data-action-compose-type="addFile"
+            ng-disabled="message.disableOthers() || message !== selected"
+            ng-class="{
+                'active': message.displayPanel && message.panelName == 'attachments',
+                'primary': message.Attachments && message.Attachments.length > 0
+            }"
+            pt-tooltip-translate="Attachments"
+            pt-placement="top">
+            <i class="fa fa-paperclip"></i>
+        </button>
+
+        <button
+            class="pm_button composer-btn-encryption"
+            ng-class="{
+                'active': message.displayPanel && message.panelName == 'encrypt',
+                'primary': message.IsEncrypted === 1
+            }"
+            ng-disabled="message.disableOthers() || message !== selected"
+            pt-placement="top"
+            pt-tooltip-context="Action"
+            pt-tooltip-translate="Encryption"
+            ng-click="togglePanel(message, 'encrypt')">
+                <i class="fa fa-lock"></i>
+                <span ng-show="!!message.maximized" translate translate-context="Title">Encryption</span>
+        </button>
+
+        <button
+            class="pm_button composer-btn-expiration"
+            ng-class="{
+                'active': message.displayPanel && message.panelName == 'expiration',
+                'primary': message.ExpirationTime > 0
+            }"
+            ng-disabled="message.disableOthers() || message !== selected"
+            pt-placement="top"
+            pt-tooltip-translate="Expiration time"
+            pt-tooltip-translate-context="Action"
+            ng-click="togglePanel(message, 'expiration')">
+            <i class="fa fa-clock-o"></i>
+            <span ng-show="!!message.maximized" translate translate-context="Action">Expiration</span>
+        </button>
+        <span class="text-muted saveAt" ng-show="message.Time" translate>Saved at {{ message.Time | date : "shortTime" }}</span>
+        <div class="pull-right">
+
+            <button
+                class="pm_button composer-btn-discard"
+                ng-disabled="message.disableDiscard()"
+                ng-click="discard(message)"
+                pt-tooltip-translate="Delete draft"
+                pt-placement="top"
+                pt-tooltip-context="Action">
+                <i class="fa fa-trash-o"></i>
+                <span ng-show="!!message.maximized" translate translate-context="Action">Discard</span>
+            </button>
+
+            <button
+                class="pm_button composer-btn-save"
+                ng-disabled="message.disableSave() || message !== selected"
+                ng-click="save(message, true, false)"
+                pt-tooltip-translate="Save"
+                pt-placement="top"
+                pt-tooltip-translate-context="Action">
+                <i class="fa fa-floppy-o"></i>
+                <span ng-show="message.maximized === true" translate translate-context="Action">Save</span>
+            </button>
+            <btn-send-message
+                class="pm_button primary mobileFull composer-btn-send"
+                data-message="message"></btn-send-message>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,64 @@
+<div id="outsideMessageWrap">
+    <div ng-if="message.ExpirationTime" id="expirationMessage">
+        <span  translate>Expiring in</span>
+        <time
+            time-refreshed="{{ ::message.ExpirationTime }}"
+            class="expirationMessage-expiration"
+            time-filter="delay"
+            time-interval="1000">
+            <i class="fa fa-spin fa-circle-o-notch"></i>
+        </time>.
+    </div>
+    <div class="message-head">
+        <a ng-click="reply()" class="pm_button pull-right">
+            <i class="fa fa-reply"></i>
+            <span class="visible-md-inline-block visible-lg-inline-block" translate-context="Action" translate>Reply securely</span>
+        </a>
+        <h1 class="no-margin-bottom">
+            <span class="attachment" ng-show="message.Attachments.length > 0">
+                <i class="fa fa-paperclip"></i>
+            </span>
+            <span ng-bind-html="message.Subject"></span>
+        </h1>
+    </div>
+    <div class="message-metadata">
+        <ul class="infos">
+            <li>
+                <strong translate-comment="message metadata" translate translate-context="Title">From</strong>
+                <b>{{ message.Sender.Name }}</b> &lt;{{ message.Sender.Address }}&gt;
+                <span class="fa fa-check-circle verified" pt-tooltip-translate="ProtonMail Verified"></span>
+            </li>
+            <li ng-if="message.ToList.length > 0">
+                <strong translate-comment="message metadata" translate translate-context="Title">To</strong>
+                <span ng-repeat="email in message.ToList">
+                    <b>{{ email.Name }}</b> &lt;{{ email.Address }}&gt;
+                </span>
+            </li>
+            <li ng-if="message.CCList.length > 0">
+                <strong translate-comment="message metadata" translate translate-context="Title">CC</strong>
+                <span ng-repeat="email in message.CCList">
+                    <b>{{ email.Name }}</b> &lt;{{ email.Address }}&gt;
+                </span>
+            </li>
+        </ul>
+
+        <display-content-btn
+            data-action="remote"
+            class="display-image text-center"
+            id="showImages"></display-content-btn>
+        <display-content-btn data-action="embedded" class="display-embedded text-center"></display-content-btn>
+
+    </div>
+    <div id="outsideMessage">
+        <div id="message-body" data-embedded-img-loader data-inject-message-media>
+            <div
+                class="bodyDecrypted email"
+                render-message-body
+                ng-if="body"
+                toggle-blockquote
+                mail-to scroll="false"></div>
+        </div>
+    </div>
+    <list-attachments data-model="message" ng-if="message"></list-attachments>
+    <div id="eo_footer"></div>
+</div>

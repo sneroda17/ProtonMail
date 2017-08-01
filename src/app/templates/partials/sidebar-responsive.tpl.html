@@ -1,0 +1,45 @@
+<section class="pm_opensans sidebar sidebarApp-container">
+    <sidebar-mobile-header class="sidebarApp-about-app"></sidebar-mobile-header>
+    <ul class="menu sidebarApp-menu">
+        <navigation-item
+            class="sidebarApp-item"
+            data-key="{{::state}}"
+            ng-repeat="state in listStates track by $id(state)"></navigation-item>
+        <li class="sidebarApp-divider"></li>
+        <li  class="sidebarApp-item" ng-class="{ active: ('secured.contacts.**' | includedByState) }">
+            <a title="Contacts" ui-sref='secured.contacts' class="sidebarApp-link">
+                <i class="fa fa-users sidebarApp-icon"></i>
+                <span translate-context="Title" translate-comment="Folder name" translate>Contacts</span>
+            </a>
+        </li>
+        <li class="sidebarApp-item" ng-class="{ active: ('secured.dashboard.**' | includedByState) }" ng-if="isFree">
+            <a title="Upgrade" ui-sref="secured.dashboard({scroll: true})" class="sidebarApp-link">
+                <i class="fa fa-arrow-up sidebarApp-icon"></i>
+                <span translate-context="Title" translate-comment="Folder name" translate>Upgrade</span>
+            </a>
+        </li>
+        <li  class="sidebarApp-item" ng-class="{ active: ('secured.account.**' | includedByState) }">
+            <a title="Settings" ui-sref='secured.account' class="sidebarApp-link">
+                <i class="fa fa-cogs sidebarApp-icon"></i>
+                <span translate-context="Title" translate-comment="Folder name" translate>Settings</span>
+            </a>
+        </li>
+        <li  class="sidebarApp-item">
+            <a target="_blank" href="https://shop.protonmail.com" class="sidebarApp-link">
+                <i class="fa fa-shopping-cart sidebarApp-icon"></i>
+                <span translate translate-context="Action">ProtonMail Shop</span>
+            </a>
+        </li>
+        <li  class="sidebarApp-item">
+            <new-bug-report ng-click="hideMobileSidebar();" class="sidebarApp-link sidebarApp-link-report"></new-bug-report>
+        </li>
+        <li  class="sidebarApp-item">
+            <a ui-sref="login" class="sidebarApp-link">
+                <i class="fa fa-power-off sidebarApp-icon"></i>
+                <span translate-context="Action"  translate>Log out</span>
+            </a>
+        </li>
+        <li class="sidebarApp-divider"></li>
+    </ul>
+    <menu-label class="sidebarApp-menu sidebarResponsive-menu-label"></menu-label>
+</section>

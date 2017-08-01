@@ -1,0 +1,47 @@
+<div id="outsideMessageWrap"  ng-if="message">
+    <div class="message-head" ng-class="{ unread:!message.IsRead, starred: message.Starred === 1 }">
+        <h1>
+            <span class="attachment" ng-show="message.Attachments.length > 0">
+                <i class="fa fa-paperclip"></i>
+            </span>
+            {{ message.Subject }}
+        </h1>
+        <div class="pull-right">
+            <span ng-bind-html="ago"></span>
+        </div>
+        <ul class="infos">
+            <li>
+                <strong translate>From</strong>:
+                <b>{{ message.Recipient }}</b>
+            </li>
+            <li>
+                <strong translate>To</strong>:
+                <b>{{message.Sender.Name}}</b> <em>&lt;{{ message.Sender.Address }}&gt;</em>
+            </li>
+        </ul>
+    </div>
+    <composer-outside></composer-outside>
+    <p class="alert alert-danger clearfix" role="alert" ng-if="message.failedDecryption">
+        <strong translate-context="Error" translate>Decryption error</strong><br />
+        <span translate-context="Error" translate>Decryption of this message's encryption content failed.</span>
+    </p>
+    <list-attachments data-model="message"></list-attachments>
+    <footer class="text-right">
+
+        <button
+            class="pm_button pull-left"
+            ng-disabled="networkActivity.loading()"
+            ng-click="cancel()"
+            translate-context="Action"
+            translate>Cancel</button>
+
+        <button
+            class="pm_button"
+            ng-disabled="networkActivity.loading()"
+            data-action-compose="::message"
+            data-action-compose-type="addFile"
+            pt-tooltip-translate="Attachments"><i class="fa fa-paperclip"></i>
+        </button>
+        <button class="pm_button primary" ng-disabled="networkActivity.loading()" ng-click="send()" translate-context="Action" translate>Send</button>
+    </footer>
+</div>

@@ -1,0 +1,54 @@
+<header responsive-composer="message" class="composerHeader-container">
+    <span ng-click="normalize(message);" class="subject composerHeader-subject">{{subject(message)}}</span>
+    <div class="composerHeader-actions actions text-right">
+        <button
+            type="button"
+            ng-show="!!!message.minimized"
+            class="pm_button link minimize-button hidden-xs composerHeader-btn composer-action-minimize"
+            ng-click="minimize(message)"
+            pt-tooltip-translate-context="Action"
+            pt-tooltip-translate="Minimize"
+            pt-placement="top">
+            <i class="fa fa-minus composerHeader-btn-icon"></i>
+        </button>
+        <button
+            type="button"
+            ng-show="!!message.minimized"
+            class="pm_button link expand-button hidden-xs composerHeader-btn composer-action-expand"
+            ng-click="unminimize(message)"
+            pt-tooltip-translate-context="Action"
+            pt-tooltip-translate="Expand"
+            pt-placement="top">
+            <i class="fa fa-minus composerHeader-btn-icon"></i>
+        </button>
+        <button
+            type="button"
+            ng-show="!!!message.maximized"
+            class="pm_button link maximize-button hidden-xs hidden-sm composerHeader-btn composer-action-maximize"
+            ng-click="normalize(message);maximize(message)"
+            pt-tooltip-translate-context="Action"
+            pt-tooltip-translate="Fullscreen"
+            pt-placement="top">
+            <i class="fa fa-expand composerHeader-btn-icon"></i>
+        </button>
+        <button
+            type="button"
+            ng-show="!!message.maximized"
+            class="pm_button link maximize-button hidden-xs composerHeader-btn composer-action-maximize"
+            ng-click="normalize(message)"
+            pt-tooltip-translate-context="Action"
+            pt-tooltip-translate="Exit fullscreen"
+            pt-placement="top">
+            <i class="fa fa-compress composerHeader-btn-icon"></i>
+        </button>
+        <button
+            type="button"
+            class="pm_button link close-button composerHeader-btn composer-action-close"
+            ng-click="openCloseModal(message)"
+            pt-tooltip-translate-context="Action"
+            pt-tooltip-translate="Close"
+            pt-placement="top">
+            <i class="fa fa-times composerHeader-btn-icon"></i>
+        </button>
+    </div>
+</header>

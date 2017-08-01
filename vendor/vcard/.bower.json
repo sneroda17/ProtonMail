@@ -1,0 +1,27 @@
+{
+  "name": "vcard",
+  "authors": [
+    "Aleksandr Kitov <kitov.nn@gmail.com>"
+  ],
+  "description": "Simple vСard parser and generator",
+  "main": "dist/vcard.min.js",
+  "keywords": [
+    "vcard"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "gulpfile.js",
+    "test/*",
+    "node_modules"
+  ],
+  "homepage": "https://github.com/ProtonMail/vcard",
+  "_release": "3756881fdd",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3756881fdda3c8eaac59ed857038cf37cc007a83"
+  },
+  "_source": "https://github.com/ProtonMail/vcard.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/ProtonMail/vcard.git"
+}

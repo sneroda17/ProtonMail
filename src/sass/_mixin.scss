@@ -1,0 +1,81 @@
+@mixin flexColumn() {
+
+    display:-webkit-flex;
+    display:flex;
+
+    -webkit-flex-direction:column;
+    flex-direction: column;
+
+    -webkit-flex:1;
+    flex:1;
+    /*
+    Allow scroll inside Flex box
+    1. An item in a flexbox will not shrink below its intrinsic size.
+    2. A flexbox is also a flex item in a parent flexbox,
+    and will not shrink because it has an implicit min-height:auto.
+    That's why we set it to zero.
+    */
+    min-height: 0px; // allow scroll for childs
+}
+
+@mixin flexRow() {
+    display:-webkit-flex;
+    display: flex;
+}
+
+
+@mixin flexInline() {
+    display:-webkit-inline-flex;
+    display: inline-flex;
+}
+
+/**
+    FILLINGS
+**/
+@mixin flexFill() {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+@mixin flexFillHeight() {
+    @include flexFill();
+}
+
+@mixin flexFillWidth() {
+    @include flexFill();
+}
+
+@mixin flexWrap() {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+/**
+    ALIGNMENTS
+**/
+@mixin flexJustifyCenter() {
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+@mixin flexJustifyEnd() {
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+@mixin flexAlignCenter() {
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+@mixin flexAlignEnd() {
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+}
+
+
+@mixin flexSelfCenter() {
+    -webkit-align-self: center;
+    align-self: center;
+}

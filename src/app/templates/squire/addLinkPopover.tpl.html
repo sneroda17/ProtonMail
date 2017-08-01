@@ -1,0 +1,46 @@
+<form
+    novalidate
+    squire-popover
+    name="addLinkPopover"
+    class="makeLink addLinkPopover-container addLinkPopover-hidden pm_form">
+
+
+    <fieldset class="addLinkPopover-panel">
+        <legend class="addLinkPopover-legend" translate>Edit the link</legend>
+
+        <div class="addLinkPopover-field row">
+            <label for="labelLink" class="addLinkPopover-label" translate>Text to display</label>
+            <input  name="labelLink" id="labelLink" class="addLinkPopover-input">
+        </div>
+
+        <div class="addLinkPopover-field row">
+            <label for="urlLink" class="addLinkPopover-label" translate>Link or Email</label>
+            <input
+                name="urlLink"
+                id="urlLink"
+                autocomplete="off"
+                placeholder-translate="Link URL"
+                class="addLinkPopover-input">
+        </div>
+    </fieldset>
+
+    <footer class="addLinkPopover-footer">
+        <button
+            class="addLinkPopover-btn-remove"
+            name="remove"
+            type="reset"
+            translate-context="Action"
+            translate>Remove link</button>
+
+        <button
+            class="addLinkPopover-btn-edit"
+            name="update"
+            translate-context="Action"
+            translate>Update link</button>
+        <button
+            class="addLinkPopover-btn-new"
+            class="btn primary"
+            name="add"
+            translate>Insert link</button>
+    </footer>
+</form>

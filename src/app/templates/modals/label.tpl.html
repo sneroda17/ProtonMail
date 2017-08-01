@@ -1,0 +1,72 @@
+<section
+    class="pm_modal small important {{ctrl.class}} labelModal-container"
+    role="dialog"
+    id="labelModal">
+    <form class="modal-dialog" ng-submit="ctrl.create()">
+        <button
+            ng-click="ctrl.cancel()"
+            type="button"
+            aria-hidden="true"
+            title-translate="Close"
+            title-translate-context="Action"
+            class="fa fa-times close"></button>
+        <div class="modal-content">
+            <header class="modal-header" ng-show="ctrl.title">
+                <h3 class="modal-title">{{ ::ctrl.title }}</h3>
+            </header>
+            <div class="modal-body pm_form pm_grid">
+                <div class="row">
+                    <label for="labelName" class="col-1-4" translate translate-context="Title">Name</label>
+                    <div class="col-3-4">
+                        <input
+                            tabindex="1"
+                            type="text"
+                            class="form-control labelModal-input-name"
+                            autofocus
+                            id="labelName"
+                            name="label"
+                            ng-model="ctrl.name"
+                            placeholder-translate="Name"
+                            required>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-1-4" translate translate-context="Title">Color</label>
+                    <div class="text-center col-3-4">
+                        <ul class="palette list-inline labelModal-list">
+                            <li
+                                class="labelModal-item"
+                                ng-repeat="c in ctrl.colors track by c"
+                                ng-style="{ 'color': c }">
+                                <input
+                                    tabindex="{{ 2 + $index}}"
+                                    type="radio"
+                                    ng-value="c"
+                                    name="paletteColor"
+                                    ng-model="ctrl.color"
+                                    aria-labelledby="Color {{::c}}"
+                                    class="labelModal-input-color">
+                                <div class="labelModal-item-mask"><i class="fa fa-check"></i></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="modal-footer">
+            <button
+                class="pm_button labelModal-btn-cancel"
+                type="button"
+                ng-click="ctrl.cancel()"
+                ng-disabled="networkActivity.loading()"
+                translate
+                translate-context="Action">Cancel</button>
+            <button
+                class="pm_button primary pull-right labelModal-btn-save"
+                ng-disabled="networkActivity.loading()"
+                translate
+                translate-context="Action">Save</button>
+        </footer>
+    </form>
+    <div class="modal-overlay"></div>
+</section>

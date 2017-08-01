@@ -1,0 +1,6 @@
+<div class="headerSecuredDesktop-container">
+    <protonmail-logo class="headerSecuredDesktop-logo headerDesktop-logo"></protonmail-logo>
+    <search-form ng-if="!('secured.contacts' | includedByState)"></search-form>
+    <search-contact ng-if="'secured.contacts' | includedByState"></search-contact>
+    <navigation></navigation>
+</div>

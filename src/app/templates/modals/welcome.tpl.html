@@ -1,0 +1,57 @@
+<div class="pm_modal {{this.class}}" role="dialog" style="display: block;" id="welcomeModal">
+    <form class="modal-dialog modal-sm" method="post" ng-submit="ctrl.next()" novalidate>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" translate translate-context="Title">Welcome to ProtonMail</h3>
+            </div>
+            <div class="modal-body">
+                <section class="pm_form">
+                    <p class="alert alert-info">
+                        <strong translate translate-context="Title">You now have an encrypted email account!</strong><br />
+                        <span translate translate-context="Info">Below are optional settings you can use to customize your account. You can always find these on your Settings page.</span>
+                    </p>
+                    <br />
+                    <div class="pm_grid">
+                        <div class="col-1-2">
+                            <label for="displayName" translate>Choose a display name</label>
+                        </div>
+                        <div class="col-1-2">
+                            <input id="displayName" type="text" name="displayName" ng-model="ctrl.displayName" placeholder-translate="Display name" />
+                            <p class="help-block"><small translate translate-context="Info">This is the 'From' name that people will see when you email them.</small></p>
+                        </div>
+                    </div>
+                </section>
+                <section class="pm_form">
+                    <hr />
+                    <div class="pm_grid">
+                        <div class="col-3-5">
+                            <p>
+                                <span translate translate-context="Title">Follow us</span>
+                                <a class="pm_button round big" target="_blank" href="https://twitter.com/ProtonMail"><i class="fa fa-twitter"></i></a>
+                                <a class="pm_button round big" target="_blank" href="https://www.facebook.com/protonmail/"><i class="fa fa-facebook"></i></a>
+                                <a class="pm_button round big" target="_blank" href="https://plus.google.com/+protonmail"><i class="fa fa-google-plus"></i></a>
+                                <a class="pm_button round big" target="_blank" href="https://www.reddit.com/r/ProtonMail/"><i class="fa fa-reddit"></i></a>
+                                <a class="pm_button round big" target="_blank" href="https://github.com/ProtonMail"><i class="fa fa-github"></i></a>
+                            </p>
+                        </div>
+                        <div class="col-2-5">
+                            <p>
+                                <span translate translate-context="Title">Download App</span>
+                                <a class="pm_button round big" target="_blank" href="https://play.google.com/store/apps/details?id=ch.protonmail.android">
+                                    <i class="fa fa-android"></i>
+                                </a>
+                                <a class="pm_button round big" target="_blank" href="https://itunes.apple.com/app/protonmail-encrypted-email/id979659905">
+                                    <i class="fa fa-apple"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="modal-footer text-right">
+            <button type="submit" class="pm_button primary" translate translate-context="Action">Finish</a>
+        </div>
+    </form>
+    <div class="modal-overlay"></div>
+</div>

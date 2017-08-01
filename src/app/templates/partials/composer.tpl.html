@@ -1,0 +1,26 @@
+<form
+    name="composeForm"
+    id="pm_composer"
+    composer-container
+    novalidate>
+    <composer
+        id="uid{{ ::message.uid}}"
+        ng-repeat="message in messages track by message.uid"
+        ng-if="message.ID"
+        ng-init="params = {}"
+        ng-style="{'z-index': message.zIndex}"
+        data-index="{{$index}}"
+        ng-class="{
+        'minimized': message.minimized,
+        'blur': message.ID !== selected.ID,
+        'maximized': message.maximized,
+        'normalized': !message.maximized && !message.minimized,
+        'expandRecipients': message.ccbcc === true,
+        'hasAttachment': (message.Attachments.length > 0),
+        'attachmentsOpen': ((message.attachmentsToggle === true) && (message.Attachments.length > 0)),
+        'moreAttachments': ((message.attachmentsToggle === true) && (message.Attachments.length > 2)),
+        'tall': (message.Attachments.length === 0),
+        'mini': mini === true,
+        'small': small === true
+        }"></composer>
+</div>

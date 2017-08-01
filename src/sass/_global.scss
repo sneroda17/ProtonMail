@@ -1,0 +1,175 @@
+html.protonmail {
+	height: 100%;
+	body {
+		height: 100%;
+		.blank { background: $white }
+		.mobileOnly { 	display: none }
+		&.scroll {
+			overflow-y: initial;
+			-webkit-overflow-scrolling: touch;
+			height: initial !important;
+		}
+		&.appConfigBody-is-mobile {
+			height: 100vh;
+            min-height: 100%;
+			.desktopOnly {
+				display: none !important;
+			}
+			.mobileOnly {
+				display: block;
+			}
+			.mobile-display-column {
+				@include flexColumn();
+			}
+			&.locked {
+				overflow: initial !important;
+			}
+			&.appConfigBody-showSidebar {
+				overflow: hidden !important;
+				#pm_main {
+					display: none;
+				}
+			}
+			#body {
+				height: initial;
+				overflow: initial !important;
+				#pm_main {
+					height: calc(100vh - 70px);
+				}
+			}
+		}
+	}
+	.visionary {
+		color: $light-blue;
+	}
+	.plus {
+		color: $light-green;
+	}
+	.background-primary {
+		background: $primary;
+	}
+	.background-red-striped {
+		background: $red-stripped;
+	}
+	.background-yellow-striped {
+		background: $yellow-stripped;
+	}
+	.bold {
+		font-weight: bold;
+	}
+	.uppercase {
+		text-transform: uppercase;
+	}
+	.clear {
+		clear: both;
+	}
+	.text-center {
+		text-align: center;
+	}
+	.text-left {
+		text-align: left;
+	}
+	.text-right {
+		text-align: right;
+	}
+	.text-gray {
+		color: $default-color;
+	}
+	.text-light-gray {
+		color: $default-color-light;
+	}
+	.text-green {
+		color: $green;
+	}
+	.text-yellow {
+		color: $yellow;
+	}
+	.text-red {
+		color: $red;
+	}
+	.text-purple {
+		color: $primary !important;
+	}
+	.text-blue-gray {
+		color: $blue-gray;
+	}
+	.border-panel {
+		padding: 15px;
+		border: 1px solid $border;
+	}
+	.padding-top {
+		padding-top: 10px;
+	}
+	.margin-top {
+		margin-top: 10px;
+	}
+	.margin-right {
+		margin-right: 10px;
+	}
+	.margin-bottom {
+		margin-bottom: 10px;
+	}
+	.margin-left {
+		margin-left: 10px;
+	}
+	.spacing-top {
+		margin-top: 3rem;
+	}
+	.spacing-bottom {
+		margin-bottom: 3rem;
+	}
+	.no-margin {
+		margin: 0;
+	}
+	.cursor-pointer{
+		cursor: pointer;
+	}
+	.dull {
+		opacity: .5;
+	}
+	.emphaseText {
+		font-size:1rem;
+	}
+	.help {
+		font-size: 12px;
+		font-style: italic;
+	}
+	.or {
+		font-size: 75%;
+	}
+	.ellipsis {
+		display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.help-dnd {
+		font-style: italic;
+		opacity: .8
+	}
+	.help-dnd:before {
+		margin-right: .5em;
+	    font-family: FontAwesome;
+		font-style: normal;
+		content: "\F047";
+	}
+
+	::-webkit-input-placeholder { color: #aaaabf }
+	:-moz-placeholder { color: #aaaabf }
+	::-moz-placeholder {  color: #aaaabf }
+	input:-ms-input-placeholder { color: #aaaabf }
+	::-ms-input-placeholder { color: #aaaabf }
+	:-ms-input-placeholder { color: #aaaabf }
+
+	.placeholder-white {
+		&::-webkit-input-placeholder { color: rgba(255,255,255,.75) }
+		&:-moz-placeholder { color: rgba(255,255,255,.75) }
+		&::-moz-placeholder {  color: rgba(255,255,255,.75) }
+		&input:-ms-input-placeholder { color: rgba(255,255,255,.75) }
+		&::-ms-input-placeholder { color: rgba(255,255,255,.75) }
+		&:-ms-input-placeholder { color: rgba(255,255,255,.75) }
+	}
+
+
+}

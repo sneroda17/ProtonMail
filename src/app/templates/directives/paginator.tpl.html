@@ -1,0 +1,31 @@
+<span
+    class="pm_buttons paginator paginator-container">
+    <a
+        pt-tooltip-translate="Previous" pt-tooltip-translate-context="Action"
+        class="paginator-btn-previous">
+        <i class="fa fa-chevron-left"></i>
+    </a>
+    <span class="pull-left paginator-dropdown-list">
+        <a
+            class="pm_trigger paginator-dropdown"
+            dropdown
+            pt-tooltip-translate="Page number"
+            pt-tooltip-translate-context="Action">
+            <small>{{ ::page }}</small>
+            <i class="fa fa-angle-down"></i>
+        </a>
+        <span class="pm_dropdown right">
+            <a ng-repeat="p in pages track by p" data-value="{{::p}}" class="paginator-dropdown-item">
+                <em
+                    class="paginator-label"
+                    translate
+                    translate-comment="current page dropdown in paginator">Page</em> {{ ::p }}
+            </a>
+        </span>
+    </span>
+    <a
+        class="paginator-btn-next"
+        pt-tooltip-translate="Next" pt-tooltip-translate-context="Action">
+        <i class="fa fa-chevron-right"></i>
+    </a>
+</span>
